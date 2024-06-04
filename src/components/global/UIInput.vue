@@ -1,0 +1,37 @@
+<script setup>
+import { computed, ref } from "vue";
+import { useStore } from "vuex";
+
+const props = defineProps(["lang"]);
+const store = useStore();
+
+const translateRequest = computed(() => {
+  return store.state.translateRequest;
+});
+
+const translateResponse = computed(() => {
+  return store.state.translateResponse;
+});
+
+let timer = null;
+
+const onChange = (e) => {
+  if (timer) {
+    clearTimeout(timer);
+    timer = null;
+  }
+  timer = setTimeout(() => {
+    store.commit("SET_TRANSLATE_REQUEST", e.target.value);
+    store.dispatch("fetchTranslateResponse");
+  }, 600);
+};
+</script>
+
+<template>
+<div class="translate-continer__input-box">
+  <textarea v-model="translateRequest" @input="onChange($event)" v-if="props.lang === 'firstLang'" class="input-box__textarea" />
+  <div v-else-if="props.lang === 'secondLang'" class="input-box__results">
+    {{ translateResponse.data?.translations.translatedText }}
+  </div>
+</div>
+</template>
