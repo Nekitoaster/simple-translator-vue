@@ -1,5 +1,5 @@
 <script setup>
-import { computed, watch } from "vue";
+import { computed} from "vue";
 import { useStore } from "vuex";
 
 const props = defineProps(["lang"]);
@@ -25,13 +25,13 @@ const onChange = (e) => {
       store.commit('SET_TRANSLATE_RESPONSE', '');
     }
   timer = setTimeout(() => {
-    console.log(translateResponse.value);
+    // console.log(translateResponse.value);
     store.commit("SET_TRANSLATE_REQUEST", e.target.value);
     store.dispatch("fetchTranslateResponse");
   }, 600);
 };
 
-console.log(translateRequest);
+// console.log(translateRequest);
 
 </script>
 
