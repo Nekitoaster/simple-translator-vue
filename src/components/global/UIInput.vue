@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, watch } from "vue";
 import { useStore } from "vuex";
 
 const props = defineProps(["lang"]);
@@ -20,18 +20,31 @@ const onChange = (e) => {
     clearTimeout(timer);
     timer = null;
   }
+
+  if (e.target.value === '') {
+      store.commit('SET_TRANSLATE_RESPONSE', '');
+    }
   timer = setTimeout(() => {
+    console.log(translateResponse.value);
     store.commit("SET_TRANSLATE_REQUEST", e.target.value);
     store.dispatch("fetchTranslateResponse");
   }, 600);
 };
+
+console.log(translateRequest);
+
 </script>
 
 <template>
-<div class="translate-continer__input-box">
-  <textarea v-model="translateRequest" @input="onChange($event)" v-if="props.lang === 'firstLang'" class="input-box__textarea" />
-  <div v-else-if="props.lang === 'secondLang'" class="input-box__results">
-    {{ translateResponse.data?.translations.translatedText }}
+  <div class="translate-container__input-box">
+    <textarea
+      v-model="translateRequest"
+      @input="onChange($event)"
+      v-if="props.lang === 'firstLang'"
+      class="input-box__textarea"
+    />
+    <div v-else-if="props.lang === 'secondLang'" class="input-box__results">
+      {{ translateResponse.data?.translations.translatedText }}
+    </div>
   </div>
-</div>
 </template>

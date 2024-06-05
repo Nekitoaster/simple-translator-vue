@@ -1,23 +1,32 @@
 <script setup>
+import { ref } from "vue";
 import TranslateWindow from "@/components/TranslateWindow.vue";
 import ArrowsIcon from "@/components/icons/ArrowsIcon.vue";
 import { useStore } from "vuex";
 
 const store = useStore();
-
-// console.log(firstLang.value, secondLang.value);
+const isButtonActive = ref(true);
 
 const onClick = () => {
-  store.dispatch("swipeLangAndRequest");
-  // console.log(firstLang.value, secondLang.value);
+  if (isButtonActive.value) {
+    isButtonActive.value = false;
+    store.dispatch("swipeLangAndRequest");
+    setTimeout(() => {
+      isButtonActive.value = true;
+    }, 1000);
+  }
 };
 </script>
 
 <template>
   <div class="wrapper">
     <TranslateWindow v-bind:lang="'firstLang'" />
-    <span class="lang-switcher">
-      <ArrowsIcon @click="onClick" />
+    <span
+      @click="onClick"
+      :class="{ inactive: !isButtonActive }"
+      class="lang-switcher"
+    >
+      <ArrowsIcon />
     </span>
     <TranslateWindow v-bind:lang="'secondLang'" />
   </div>

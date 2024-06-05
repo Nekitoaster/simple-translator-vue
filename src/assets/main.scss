@@ -101,7 +101,7 @@ body {
       border-bottom: 3px solid $gray-light-color;
       border-top-right-radius: 12px;
       border-bottom-right-radius: 12px;
-      
+
       outline: none;
       font-size: 18px;
       margin-left: 10px;
@@ -122,6 +122,8 @@ body {
   cursor: pointer;
   min-width: 35px;
   min-height: 35px;
+  width: 35px;
+  height: 35px;
   transition: transform 400ms ease;
 
   &:hover {
@@ -140,7 +142,7 @@ body {
   }
 }
 
-.translate-continer__input-box {
+.translate-container__input-box {
   height: calc(100% - 50px);
   padding: 10px;
 
@@ -171,5 +173,105 @@ body {
       border: 1px solid $black-color;
       border-radius: 5px;
     }
+  }
+}
+
+.inactive {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 46px;
+    padding: 0 15px;
+
+    .header__logo-container {
+      .logo-container__icon {
+        width: 20px;
+        height: 20px;
+      }
+
+      .logo-container__title {
+        font-size: 16px;
+      }
+    }
+  }
+  .wrapper {
+    flex-direction: column;
+    position: relative;
+    padding: 8px 10px;
+    height: calc(100vh - 46px);
+    gap: 0;
+
+    .lang-switcher {
+      min-width: 40px;
+      min-height: 40px;
+      width: 40px;
+      height: 40px;
+      background: $white-color;
+      border-radius: 50%;
+      position: absolute;
+      border: 5px solid $primary-color;
+      padding: 5px;
+      transform: rotate(90deg);
+
+      &:hover {
+        transform: rotate(450deg) scale(1.2);
+
+        svg {
+          filter: none;
+        }
+      }
+
+      svg {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .translate-container {
+    max-width: 700px;
+    .translate-container__lang-change-container {
+      padding-inline: 5px;
+      height: 40px;
+
+      .custom-select {
+        margin-left: 0px;
+        font-size: 16px;
+        border-radius: 0;
+
+        border-bottom: 0;
+
+        .custom-select__option {
+          font-size: 12px;
+          background: $body-bg-color;
+        }
+      }
+    }
+
+    .translate-container__input-box {
+      height: calc(100% - 40px);
+
+      .input-box__textarea,
+      .input-box__results {
+        font-size: 18px;
+      }
+    }
+
+    &:first-child {
+      overflow: hidden;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    &:last-child {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+    }
+  }
+
+  .translate-container__input-box {
+    padding: 5px;
   }
 }
