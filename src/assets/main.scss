@@ -99,12 +99,11 @@ body {
       height: 100%;
       border: none;
       border-bottom: 3px solid $gray-light-color;
+      border-top-left-radius: 12px;
       border-top-right-radius: 12px;
-      border-bottom-right-radius: 12px;
 
       outline: none;
       font-size: 18px;
-      margin-left: 10px;
 
       &:hover {
         background: $body-bg-color;
@@ -237,7 +236,6 @@ body {
       height: 40px;
 
       .custom-select {
-        margin-left: 0px;
         font-size: 16px;
         border-radius: 0;
 
@@ -252,6 +250,11 @@ body {
 
     .translate-container__input-box {
       height: calc(100% - 40px);
+
+      .input-box__textarea {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
 
       .input-box__textarea,
       .input-box__results {

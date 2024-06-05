@@ -48,3 +48,7 @@ console.log(translateRequest);
     </div>
   </div>
 </template>
+
+<style scoped>
+
+</style>
